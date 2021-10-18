@@ -20,13 +20,14 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         float verticalInput = Input.GetAxisRaw("Vertical");
 
-        Vector3 direction = new Vector3(verticalInput, 0, -horizontalInput).normalized;
+        Vector3 direction = new Vector3(horizontalInput, 0, verticalInput).normalized;
 
         if (direction.magnitude >=0.1f)
         {
-            float targetAngle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0f, targetAngle, 0);
             controller.Move(direction * speed);
+            float targetAngle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+            
             playerAnim.SetBool("isWalk", true);
         }
         else
