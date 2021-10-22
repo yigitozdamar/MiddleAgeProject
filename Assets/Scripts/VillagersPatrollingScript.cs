@@ -5,9 +5,8 @@ using DG.Tweening;
 
 public class VillagersPatrollingScript : MonoBehaviour
 {
-    //public Transform male_1;
     //public PathType pathSystem = PathType.Linear;
-    //public Vector3[] points = new Vector3[2];
+    private Vector3[] points;
     //public Tween t;
     //Sequence mySeq = DOTween.Sequence();
 
@@ -18,17 +17,23 @@ public class VillagersPatrollingScript : MonoBehaviour
 
     void Start()
     {
-        //t = male_1.transform.DOPath(points, 15, pathSystem);
+        points = new Vector3[waypoints.Length];
+        for (int i = 0; i < waypoints.Length; i++)
+            points[i] = waypoints[i].position;
+
+        transform.DOPath(points, 5).SetEase(Ease.Linear).SetLoops(-1).SetLookAt(0.01f);
         //t.SetEase(Ease.Linear).SetLoops(-1);      
+
 
         animator = GetComponent<Animator>();
         animator.SetBool("isWalk", true);
-
     }
 
     // Update is called once per frame
     void Update()
     {
+        return;
+
         Transform wp = waypoints[_currentWaypointIndex];
         if (Vector3.Distance(transform.position, wp.position) < 0.1f)
         {

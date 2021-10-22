@@ -25,8 +25,7 @@ public class PlayerController : MonoBehaviour
         if (direction.magnitude >=0.1f)
         {
             controller.Move(direction * speed);
-            float targetAngle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+            transform.rotation = Quaternion.LookRotation(direction);
             
             playerAnim.SetBool("isWalk", true);
         }
@@ -35,7 +34,7 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetBool("isWalk", false);
         }
         
-
+        
 
     }
 }
